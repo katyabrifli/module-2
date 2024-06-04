@@ -1,0 +1,44 @@
+class Account:
+    def __init__(self):
+        self._balance = 0
+
+    def deposit(self, amount):
+        self._balance += amount
+
+    def withdrawl(self, amount ):
+        if self._balance >= amount:
+            self._balance -= amount
+        else:
+            print('Insufficient funds')
+
+    def get_balance(self):
+        return self._balance
+
+class SavingsAccount(Account):
+    def __init__(self):
+        super().__init__()
+        self.interest_rate = 0.05
+
+    def add_interest(self):
+        interest = self._balance * self.interest_rate
+        self._balance += interest
+
+class CheckingAccount(Account):
+    def __init__(self):
+        super().__init__()
+        self.trans_fee = 1.0
+
+    def withdraw(self, amount):
+        if self._balance >= amount + self.trans_fee:
+            self._balance -= (amount + self.trans_fee)
+        else:
+            print("Insufficient funds for withdrawal including transaction fee")
+
+savings_acc = SavingsAccount()
+checking_acc = CheckingAccount()
+savings_acc.deposit(1000)
+savings_acc.add_interest()
+print("Savings Account Balance:", savings_acc.get_balance())
+checking_acc.deposit(500)
+checking_acc.withdraw(100)
+print("Checking Account Balance:", checking_acc.get_balance())

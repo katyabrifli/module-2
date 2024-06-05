@@ -1,0 +1,105 @@
+class Game:
+    def __init__(self):
+        self.story = "Somewere in the forest..."
+        self.choices ={
+            1: "Go deeper into the forest ",
+            2: "Follow the light",
+            3: "Return to the castel"
+        }
+
+    def start_game(self):
+        print(self.story)
+        self.show_choices()
+        self.get_user_choice()
+
+
+    def show_choices(self):
+         print("What do you want to do?")
+         for choice_num, choice_text in self.choices.items():
+            print(f"{choice_num}: {choice_text}")
+
+    def get_user_choice(self):
+        try:
+            user_choice = int(input("Enter the number of your choice: "))
+            self.handle_choice(user_choice)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            self.get_user_choice()
+
+    def handle_choice(self, choice):
+        if choice == 1:
+            print("Be careful u can meet the monsters")
+        elif choice == 2:
+            print("Follow the light, he will help u ")
+        elif choice == 3:
+            print("Game over")
+        else:
+            print('Invalid choice. Please try again.')
+            self.get_user_choice()
+
+    def explore_forest(self):
+        new_choices = {
+            1: "Investigate the strange noise",
+            2: "Climb a tree to get a better view",
+            3: "Sit down and rest for a while"
+
+        }
+        self.show_new_choices(new_choices)
+        self.get_new_user_choice(new_choices)
+
+    def follow_light(self):
+        print("You decide to follow the light, hoping it will lead you to safety.")
+        new_choices = {
+            1: "Approach the mysterious figure holding the light",
+            2: "Hide and observe from a distance",
+            3: "Shout and ask for help"
+        }
+        self.show_new_choices(new_choices)
+        self.get_new_user_choice(new_choices)
+    def show_new_choices(self,new_choices):
+        print("What do you want to do next?")
+        for choice_num, choice_text in new_choices.items():
+            print(f"{choice_num}: {choice_text}")
+
+    def get_new_user_choice(self, new_choices):
+        try:
+            user_choice = int(input("Enter the number of your choice: "))
+            self.handle_new_choice(user_choice, new_choices)
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+            self.get_new_user_choice(new_choices)
+
+    def handle_new_choice(self, choice, new_choices):
+        if choice == 1:
+            if "noise" in new_choices[1]:
+                print(
+                    "You walk towards the noise and encounter a friendly forest creature. It guides you to a hidden path out of the forest.")
+
+            elif "figure" in new_choices[1]:
+                print(
+                    "You approach the figure and discover it's a wise old sage. He offers you wisdom and a safe passage home.")
+
+        elif choice == 2:
+            if "tree" in new_choices[2]:
+                print(
+                    "You climb the tree and spot a village in the distance. You safely make your way there and find help.")
+
+            elif "observe" in new_choices[2]:
+                print(
+                    "You hide and observe the figure. It turns out to be a traveler who helps you find your way out of the forest.")
+
+        elif choice == 3:
+            if "rest" in new_choices[3]:
+                print(
+                    "You sit down to rest, but suddenly feel drowsy and fall asleep. You wake up to find friendly villagers who take you to their village.")
+
+            elif "shout" in new_choices[3]:
+                print(
+                    "You shout for help. The figure hears you and comes closer. It's a ranger who helps you find your way out of the forest.")
+        else:
+            print("Invalid choice. Please try again.")
+            self.get_new_user_choice(new_choices)
+
+
+game = Game()
+game.start_game()
